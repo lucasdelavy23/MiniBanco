@@ -1,0 +1,9 @@
+# Arquivos gerados pelo .NET
+**/bin/
+**/obj/
+
+# Configurações locais de IDE
+.vs/
+.idea/
+*.user
+*.suo
