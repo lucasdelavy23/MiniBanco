@@ -24,6 +24,13 @@ public class ContaCorrente : Conta
             throw new ArgumentException("O valor do saque deve ser maior que zero.", nameof(valor));
         }
 
+        // Com saldo negativo, valida antes da subtração para evitar estouro
+        // em saques que já devem ser recusados por falta de limite.
+        if (this.Saldo < 0 && valor > this.Saldo + this.LimiteChequeEspecial)
+        {
+            throw new SaldoInsuficienteException("Saldo e limite do cheque especial insuficientes para o saque.");
+        }
+
         decimal novoSaldo = checked(this.Saldo - valor);
 
         // Comparar o saldo resultante evita somar saldo e limite muito altos.
